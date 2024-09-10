@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}  <!-- Cargar las etiquetas estáticas aquí -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bandeja de mensajes{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <section>
+        {% block welcome %}
+        <!-- Bloque opcional para contenido en la parte superior -->
+        {% endblock %}
+    </section>
+    <header>
+        <h1>Opciones</h1>
+        <nav>
+            <ul>
+                <h3>Usuario:
+                    {%if user.is_authenticated %}
+                        {{user.username}}<!--muestra el nombre del usuario-->
+                    {% else %}
+                        Invitado<!--Solo si los usuarios no fueron autenticados-->
+                    {% endif %}
+                </h3>
+                <h2>USUARIOS</h2>
+                <li><a href="{% url 'registro' %}">Registrarse</a></li>
+                <li><a href="{% url 'login' %}">Iniciar Sesi&oacute;n</a></li>
+                <h2>MENSAJES</h2>
+                <li><a href="{% url 'crear_mensaje' %}">Crear Mensaje</a></li>
+                <li><a href="{% url 'mensajes_recibidos' %}">Mensajes Recibidos</a></li>
+                <li><a href="{% url 'mensajes_enviados' %}">Mensajes Enviados</a></li>
+
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        {% block content %}
+        <!-- Aquí se colocara el contenido especifico de cada pagina -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Bandeja de mensajes</p>
+    </footer>
+</body>
+</html>

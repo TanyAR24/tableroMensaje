@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+{% block title %}Mensajes enviados{% endblock %}
+{% block content %}
+  <h2>Mensajes enviados</h2>
+  <ul>
+    {% for mensaje in mensajes %}
+      <li>
+        <strong>Para:</strong> {{ mensaje.destinatario }}<br>
+        <strong>Mensaje:</strong> {{ mensaje.textoMensaje }}<br>
+        <strong>Fecha:</strong> {{ mensaje.fechaEnvio }}
+        <li><a href="{% url 'eliminar_mensaje' mensaje.id %}?next=mensajes_enviados">Eliminar mensaje</a></li>
+      </li>
+    {% empty %}
+      <p>No tienes mensajes recibidos.</p>
+    {% endfor %}
+  </ul>
+{% endblock %}
